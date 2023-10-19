@@ -1,0 +1,75 @@
+$car-width: 200px;
+$car-height: 180px;
+$road-width: 400px;
+$road-height: 100vh;
+$contour-line-section-height: 300px;
+$contour-line-spacing: 40px;
+$car-animation-duration: 0.3s;
+
+*{
+    margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000;
+}
+
+.road {
+  position: relative;
+  width: $road-width;
+  height: $road-height;
+  background-color: #777;
+  overflow: hidden;
+}
+
+.contour-line {
+    position: absolute;
+    left: 45%;
+  width: $contour-line-spacing;
+  height: $contour-line-section-height;
+  background-color: #fff;
+  animation: moveContourLine 1s linear infinite;
+}
+
+@keyframes moveContourLine {
+  0% {
+    transform: translateY(-$contour-line-section-height);
+  }
+  100% {
+    transform: translateY($road-height);
+  }
+}
+@keyframes moveCarLine {
+  0% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.car {
+  position: absolute;
+  bottom: 10vh;
+  left: 40px;
+  transform: translateX(-50%);
+  transition: transform $car-animation-duration;
+  animation: moveCarLine 2s alternate infinite;
+
+  img {
+    width: $car-width;
+    height: $car-height;
+  }
+}
+
+.car.left {
+  transform: translateX(-50%) rotate(-15deg);
+}
+
+.car.right {
+  transform: translateX(-50%) rotate(15deg);
+}
